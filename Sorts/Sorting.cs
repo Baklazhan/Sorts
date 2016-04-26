@@ -108,7 +108,7 @@ namespace Sorts
         //Worst case space complexity:  О(n) total, O(n) auxiliary
         public static void MergeSort(ref int[] array)
         {
-
+            //TODO: Merge sort
         }
 
         //TODO: Quick Sort Description
