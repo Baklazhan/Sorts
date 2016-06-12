@@ -21,7 +21,7 @@ namespace Sorts
         {
             int temp = a;
             a = b;
-            b = a;
+            b = temp;
         }
 
         //Bubble Sort                   [https://en.wikipedia.org/wiki/Bubble_sort]
@@ -116,8 +116,72 @@ namespace Sorts
         //Worst case space complexity:  О(n) total, O(n) auxiliary
         public static void MergeSort(ref int[] array)
         {
-            //TODO: Merge sort
+            if (array.Count() >= 1)
+            {
+                int split = array.Length/2;
+
+                MergeSortPrivate(ref array, 0, split);
+                MergeSortPrivate(ref array, split + 1, array.Length-1);
+                Merge(ref array, 0, split, array.Length-1);
+            }
         }
+
+        private static void MergeSortPrivate(ref int[] array, int left, int right)
+        {
+            if (right - left == 1)
+            {
+                if (array[left] > array[right])
+                {
+                    Swap(ref array[left], ref array[right]);
+                }
+            }
+
+            if (right - left > 1)
+            {
+                int split = (left + right)/2;
+
+                MergeSortPrivate(ref array, left, split);
+                MergeSortPrivate(ref array, split + 1, right);
+                Merge(ref array, left, split, right);
+            }
+
+        }
+
+        private static void Merge(ref int[] array, int left, int split, int right)
+        {
+            int[] tempArray = new int[right - left + 1];
+
+            int pos1 = left;
+            int pos2 = split + 1;
+            int pos3 = 0;
+
+            while(pos1 <= split && pos2 <= right)
+            {
+                if(array[pos1] < array[pos2])
+                {
+                    tempArray[pos3++] = array[pos1++];
+                }
+                else
+                {
+                    tempArray[pos3++] = array[pos2++];
+                }
+            }
+
+            while(pos1 <= split)
+            {
+                tempArray[pos3++] = array[pos1++];
+            }
+            while(pos2 <= right)
+            {
+                tempArray[pos3++] = array[pos2++];
+            }
+
+            for(pos3 = 0; pos3 < right-left+1; pos3++)
+            {
+                array[left + pos3] = tempArray[pos3];
+            }
+        }
+
 
         //TODO: Quick Sort Description
         public static void QuickSort()
