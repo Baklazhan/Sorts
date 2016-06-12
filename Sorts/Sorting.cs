@@ -16,6 +16,14 @@ namespace Sorts
             a = a - b;
         }
 
+        //Swap with using temporary variable
+        public static void Swap2(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = a;
+        }
+
         //Bubble Sort                   [https://en.wikipedia.org/wiki/Bubble_sort]
         //Worst performance:            O(n^2)
         //Best performance:             O(n)
